@@ -149,27 +149,23 @@ public class BORK extends LinearOpMode {
                         inTakeTimer.reset();
                     }
                 }else robot.toggleInputs[0][0] = false;
-                
-                if (robot.toggleInputs[0][1])
-                {
-                    robot.inTakeMotor.setPower(-1);
+                if(!gamepad2.dpad_down) {
+                    if (robot.toggleInputs[0][1]) {
+                        robot.inTakeMotor.setPower(-1);
 
-                    if(inTakeTimer.seconds() >= .5 && robot.inTakeMotor.getPower() != 0)// if you want to make it longer/shorter adjust the
-                    {
-                        robot.inTakeMotor.setPower(0);
-                        robot.Arm2.setPower(1);
+                        if (inTakeTimer.seconds() >= .5 && robot.inTakeMotor.getPower() != 0)// if you want to make it longer/shorter adjust the
+                        {
+                            robot.inTakeMotor.setPower(0);
+                            robot.Arm2.setPower(1);
+                        }
+                    } else {
+                        robot.Arm2.setPower(0);
+                        robot.inTakeMotor.setPower(1);
+                        if (inTakeTimer.seconds() >= .5 && robot.inTakeMotor.getPower() != 0) {
+                            robot.inTakeMotor.setPower(0);
+                        }
                     }
                 }
-                else
-                {
-                    robot.Arm2.setPower(0);
-                    robot.inTakeMotor.setPower(1);
-                    if(inTakeTimer.seconds() >= .5 &&  robot.inTakeMotor.getPower() != 0)
-                    {
-                        robot.inTakeMotor.setPower(0);
-                    }
-                }
-
                 if (gamepad2.x) {
                     robot.servo.setPower(1);
                 } else if (gamepad2.b) {
