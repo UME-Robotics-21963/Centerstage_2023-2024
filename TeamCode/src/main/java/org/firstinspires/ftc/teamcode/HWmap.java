@@ -30,6 +30,8 @@
 package org.firstinspires.ftc.teamcode;
 
 
+import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.telemetry;
+
 import android.app.Activity;
 import android.view.View;
 
@@ -47,6 +49,9 @@ import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.ServoImplEx;
 import com.qualcomm.robotcore.hardware.SwitchableLight;
 import com.qualcomm.hardware.bosch.BNO055IMU.Parameters;
+
+import org.firstinspires.ftc.robotcore.external.Telemetry;
+
 /**
 motors
  leftFrontdrive 0
@@ -72,11 +77,15 @@ public class HWmap {
     public NormalizedColorSensor colorsensor;
     public View relativeLayout;
     double phaseNumber = 0;
+    public Telemetry[] Tele = new Telemetry[1];
     public boolean[][] toggleInputs = new boolean[2][2];
     //to increase the number of booleans just increase both numbers by 1 for toggles
     /**
      {(1,0),(1,1)
      {(0,0),(0,1) intake 0,0 is not active 0,1 is active
+     aka x = which set its in and y = what value it holds
+     0 being false/ not active
+     1 being true/ is active
      **/
     public IMU imu;
 
@@ -100,7 +109,15 @@ public class HWmap {
 
         colors = colorsensor.getNormalizedColors();
     }
-
+    public void Telementry() {
+        telemetry.addData("ClawSetPower", servo.getPower());
+        telemetry.addData("plane power: ", plane.getPower());
+        telemetry.addData("intake value: ", toggleInputs[0][0]);
+        telemetry.addData("outTake value: ", toggleInputs[0][1]);
+        telemetry.addData("arm1: ", inTakeMotor);
+        telemetry.addData("arm2: ", Arm2);
+        telemetry.update();
+    }
    public void initialize(HardwareMap ahwMap) {
         HardwareMap hwMap = ahwMap;
         // Initialize the hardware variables. Note that the strings used here as parameters

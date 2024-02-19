@@ -5,7 +5,6 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 
@@ -21,7 +20,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
  * Remove or comment out the @Disabled line to add this opmode to the Driver Station OpMode list
  */
 //todo"duck"
-    //joel don't you DARE delete todo DUCK or i will hurt you
+    //don't you DARE delete todo DUCK or i will hurt you
 @TeleOp(name="BORK", group="Linear Opmode")
 public class BORK extends LinearOpMode {
     HWmap robot = new HWmap();
@@ -29,6 +28,7 @@ public class BORK extends LinearOpMode {
     @Override
     public void runOpMode() {
         robot.initialize(hardwareMap);
+        robot.Telementry();
         robot.servo.setPower(1);
         waitForStart();
         //telemetry.addData("byarharhar", robot.servo.getPower());
@@ -71,7 +71,6 @@ public class BORK extends LinearOpMode {
                             robot.FRPower /= max;
                         }
 
-
                     }//This code makes sure that the motors' powers stay under 1 (the limit) while staying proportional to each other.
 
                 /*
@@ -79,6 +78,7 @@ public class BORK extends LinearOpMode {
                 leftPower  = -gamepad1.left_stick_y;
                 rightPower = -gamepad1.right_stick_y;
                 *///tonk mode
+
                     if (true) {
                         if (Math.abs(robot.BLPower) < Math.abs(robot.BLDrive.getPower())) {
                             if (Math.abs((robot.BLPower + robot.BLDrive.getPower()) * .5) <= 0.1) {
@@ -121,9 +121,8 @@ public class BORK extends LinearOpMode {
                         }
 
                     } //Send calculated power to wheels
-                }//chassis motors
-                robot.inTakeMotor.setPower(gamepad2.left_stick_y * .5); //THANK YOU ETHAN!
 
+                }//chassis motors
 
                 //linear slide code: if up dpad is pressed, go up, if down dpad is pressed, go down, if neither is pressed, stay still
                 /*
@@ -141,7 +140,7 @@ public class BORK extends LinearOpMode {
                 }
                 */
 
-                if(gamepad2.dpad_down)
+                if(gamepad2.dpad_down)//if gamepad 1 down
                 {
                     if(!robot.toggleInputs[0][0]) {
 
@@ -161,16 +160,12 @@ public class BORK extends LinearOpMode {
                         robot.inTakeMotor.setPower(0);
                     }
                 }
+
                 if (gamepad2.x) {
                     robot.servo.setPower(1);
                 } else if (gamepad2.b) {
                     robot.servo.setPower(0);
                 } //claw closing & opening code
-
-                telemetry.addData("ClawSetPower", robot.servo.getPower());
-
-
-
 
                 if(gamepad2.y)
                 {
@@ -179,25 +174,14 @@ public class BORK extends LinearOpMode {
                     robot.plane.setPower(1);
                 }
 
-                telemetry.addData("plane power: ",robot.plane.getPower());
-
                 if(robot.plane.getPower() == 1)
                 {
                     telemetry.addLine("drone launched!");
                 }
-                telemetry.addData("intake value: ",robot.toggleInputs[0][0]);
-                telemetry.addData("outTake value: ",robot.toggleInputs[0][1]);
-                telemetry.addData("arm1: ",robot.inTakeMotor);
-                telemetry.addData("arm2: ",robot.Arm2);
-
-                telemetry.update();
+                //telemetry code all in one place
             }
 
         }
-    }}
-
-
-
-
-
+    }
+}
 //look at the top
