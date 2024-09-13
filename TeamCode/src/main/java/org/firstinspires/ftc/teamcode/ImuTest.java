@@ -45,7 +45,6 @@ public class ImuTest extends LinearOpMode {
 
         waitForStart();
         while(opModeIsActive()){
-        ImuTemeletry();
         }
         //driveStraight(.5,2,90);
 
@@ -89,7 +88,6 @@ public class ImuTest extends LinearOpMode {
             // keep looping while we are still active, and BOTH motors are running.
             while (opModeIsActive() &&
                     (robot.FLDrive.isBusy() && robot.FRDrive.isBusy())) {
-                ImuTemeletry();
                 // Determine required steering to keep on heading
                 turnSpeed = getSteeringCorrection(heading, P_DRIVE_GAIN);
 
@@ -232,11 +230,7 @@ public class ImuTest extends LinearOpMode {
             }
         }
     }
-    public void ImuTemeletry()
-    {
-        telemetry.addData("current heading:",getHeading());
-        telemetry.update();
-    }
+
     public double getSteeringCorrection(double desiredHeading, double proportionalGain) {
         targetHeading = desiredHeading;  // Save for telemetry
 
@@ -252,7 +246,6 @@ public class ImuTest extends LinearOpMode {
     }
     double getHeading() {
         YawPitchRollAngles orientation = robot.imu.getRobotYawPitchRollAngles();
-        telemetry.addData("Orientation:- ", orientation);
         return orientation.getRoll(AngleUnit.DEGREES);
     }
 }

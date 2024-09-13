@@ -19,10 +19,10 @@ public class PlaceHoldertext extends LinearOpMode {
         robot.initialize2(hardwareMap);
         Motors_Hardware.initMotors(hardwareMap);
         if(true) {
-            Motors[0][0] = Motors_Hardware.motors[0];
-            Motors[0][1] = Motors_Hardware.motors[1];
-            Motors[1][0] = Motors_Hardware.motors[2];
-            Motors[1][1] = Motors_Hardware.motors[3];
+            Motors[0][0] = Motors_Hardware.motors[0];//FR
+            Motors[0][1] = Motors_Hardware.motors[1];//FL
+            Motors[1][0] = Motors_Hardware.motors[2];//BR
+            Motors[1][1] = Motors_Hardware.motors[3];//BL
         }
             waitForStart();
 
@@ -35,33 +35,33 @@ public class PlaceHoldertext extends LinearOpMode {
             telemetry.update();
             if (true) {
                 if (direction == -1) {
-                    robot.FLDrive.setPower(speed);
-                    robot.FRDrive.setPower(-speed);
-                    robot.BLDrive.setPower(speed);
-                    robot.BRDrive.setPower(-speed);
+                    Motors_Hardware.motors[1].setPower(speed);
+                    Motors_Hardware.motors[0].setPower(-speed);
+                    Motors_Hardware.motors[2].setPower(speed);
+                    Motors_Hardware.motors[3].setPower(-speed);
                 }
                 if (direction == 0) {
-                    robot.FLDrive.setPower(speed);
-                    robot.FRDrive.setPower(speed);
-                    robot.BLDrive.setPower(speed);
-                    robot.BRDrive.setPower(speed);
+                    Motors_Hardware.motors[1].setPower(speed);
+                    Motors_Hardware.motors[0].setPower(speed);
+                    Motors_Hardware.motors[2].setPower(speed);
+                    Motors_Hardware.motors[3].setPower(speed);
                 }
                 if (direction == -2) {
-                    robot.FLDrive.setPower(-speed);
-                    robot.FRDrive.setPower(-speed);
-                    robot.BLDrive.setPower(-speed);
-                    robot.BRDrive.setPower(-speed);
+                    Motors_Hardware.motors[1].setPower(-speed);
+                    Motors_Hardware.motors[1].setPower(-speed);
+                    Motors_Hardware.motors[2].setPower(-speed);
+                    Motors_Hardware.motors[3].setPower(-speed);
                 }
                 if (direction == 1) {
-                    robot.FLDrive.setPower(-speed);
-                    robot.FRDrive.setPower(speed);
-                    robot.BLDrive.setPower(-speed);
-                    robot.BRDrive.setPower(speed);
+                    Motors_Hardware.motors[1].setPower(-speed);
+                    Motors_Hardware.motors[0].setPower(speed);
+                    Motors_Hardware.motors[2].setPower(-speed);
+                    Motors_Hardware.motors[3].setPower(speed);
                 }
-                robot.FLDrive.setPower(0);
-                robot.FRDrive.setPower(0);
-                robot.BLDrive.setPower(0);
-                robot.BRDrive.setPower(0);
+                Motors_Hardware.motors[1].setPower(0);
+                Motors_Hardware.motors[0].setPower(0);
+                Motors_Hardware.motors[2].setPower(0);
+                Motors_Hardware.motors[3].setPower(0);
             }
         }// to turn right, make direction = 1 to turn left, make direction = -1,
         // to go forward make direction = 0 to go in reverse make direction = -2

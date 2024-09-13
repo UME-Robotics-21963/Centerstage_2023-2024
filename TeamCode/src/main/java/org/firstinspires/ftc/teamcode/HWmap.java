@@ -51,6 +51,8 @@ import com.qualcomm.robotcore.hardware.SwitchableLight;
 import com.qualcomm.hardware.bosch.BNO055IMU.Parameters;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
+import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
+import org.firstinspires.ftc.robotcore.external.navigation.YawPitchRollAngles;
 
 /**
 motors
@@ -116,7 +118,13 @@ public class HWmap {
         telemetry.addData("outTake value: ", toggleInputs[0][1]);
         telemetry.addData("arm1: ", inTakeMotor);
         telemetry.addData("arm2: ", Arm2);
+        telemetry.addData("current heading:",getHeading());
+
         telemetry.update();
+    }
+    double getHeading() {
+        YawPitchRollAngles orientation = imu.getRobotYawPitchRollAngles();
+        return orientation.getRoll(AngleUnit.DEGREES);
     }
    public void initialize(HardwareMap ahwMap) {
         HardwareMap hwMap = ahwMap;
